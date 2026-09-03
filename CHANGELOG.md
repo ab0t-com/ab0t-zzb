@@ -13,6 +13,22 @@ semantic versioning (published versions carry a `-public` suffix; git tags are t
 
 _Nothing yet._
 
+## [0.1.2] — 2026-09-03
+
+Docs + DX polish. No engine changes; the only binary change is richer help text.
+
+### Added (CLI binary)
+- **Richer top-level help.** The bare `zzb` screen now includes an **Examples** block
+  (init → grant → check → list-users → diff → audit → access-review) and a **See also**
+  footer (per-command `--help`, `zzb scenario list`, typo suggestions, docs/skills link).
+  Per-verb `--help` already carried examples + a NEXT block.
+
+### Docs & branding
+- **New README** — benefit-led rewrite with a hero image (`assets/hero.png`). The prior
+  reference README is preserved as `README1.md`.
+- **Brand image-prompt specs** under `branding/` — `IMAGE_PROMPTS.md` (cinematic data-art)
+  and `IMAGE_PROMPTS_v2.md` (cute-cartoon mascot) for repo + landing-page art.
+
 ## [0.1.1] — 2026-09-03
 
 CLI + docs release. This changelog covers the **`zanzibarctl` binary and its bundled
