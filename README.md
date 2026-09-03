@@ -60,6 +60,8 @@ Every command has real, copy-pasteable help: `zzb <command> --help` shows exampl
 
 zzb is the **CLI** for your authorization: model the schema, load and query relationships, audit, review, migrate, debug. Your **application** calls the same auth service at runtime via the SDK/API for live permission checks. Think of zzb as the control plane you and your platform team live in; the SDK is what your app calls a million times a second.
 
+> **CLI doesn't have what you need?** Everything zzb does is the auth service's REST API underneath — call it directly. Full spec: **https://auth.service.ab0t.com/openapi.json**
+
 - **New to ReBAC or modeling?** → `skills/zzb-modeling/` — the permission language, and the traps to avoid.
 - **Building a specific product?** → `skills/zzb-authorization-recipes/` — real setups by size and shape, copy-paste ready.
 - **Wiring it into an existing app / CI?** → `skills/zzb-lifecycle/` — schema-as-code, migration, day-2 ops.

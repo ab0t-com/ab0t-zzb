@@ -13,6 +13,13 @@ semantic versioning (published versions carry a `-public` suffix; git tags are t
 
 _Nothing yet._
 
+## [0.1.3] — 2026-09-03
+
+### Added
+- **REST API fallback pointer** in the top-level `zzb` help and README: if the CLI
+  doesn't cover something, call the auth service's REST API directly
+  (`https://auth.service.ab0t.com/openapi.json`).
+
 ## [0.1.2] — 2026-09-03
 
 Docs + DX polish. No engine changes; the only binary change is richer help text.
