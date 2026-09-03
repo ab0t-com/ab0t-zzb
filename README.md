@@ -21,7 +21,7 @@ curl -fsSL https://raw.githubusercontent.com/ab0t-com/ab0t-zzb/main/install.sh |
 
 ## Why teams reach for zzb
 
-**🚀 From zero to a working model in one command.** `zzb init --template drive --publish` scaffolds a real, tested authorization model — documents, folders, sharing, roles — and publishes it. Ten templates cover the shapes you're probably building (SaaS multi-tenant, GitHub-style repos, a bank, Slack, a data warehouse). Start from one instead of a blank file.
+**🚀 From zero to a working model in one command.** `zzb init --template drive --publish` scaffolds a real, tested authorization model — documents, folders, sharing, roles — and publishes it. Eighteen production templates cover the shapes you're probably building (SaaS multi-tenant, GitHub-style repos, Jira, a bank, Slack, healthcare, a data warehouse, B2B2B reseller…). Start from one instead of a blank file.
 
 **🔍 Answer "who can access this?" instantly.** `zzb list-users doc:q3 can_view` tells you exactly who — and `zzb check user:alice can_edit doc:q3` gives you the allow/deny in milliseconds. When someone asks during an incident, you have the answer, not a theory.
 
