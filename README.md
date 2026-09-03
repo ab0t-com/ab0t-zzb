@@ -37,26 +37,43 @@ curl -fsSL https://raw.githubusercontent.com/ab0t-com/ab0t-zzb/main/install.sh |
 
 ## Templates — start from a real shape, not a blank file
 
-`zzb init --template <name> [--publish]` scaffolds a working, tested model. Ten
-templates span simple roles to genuinely hard authorization:
+`zzb init --template <name> [--publish]` scaffolds a **production starting point** —
+not a toy. Each ships a complete, layered model (org/tenancy → workspace/team →
+resource), a `seed.json`, an `assertions.json` proving the "must never" rules, and a
+`README.md` explaining the whole data model and how it scales. Eighteen templates:
 
 | Template | What it models |
 |---|---|
-| `docs` | owner / editor / viewer + computed can_view/edit/delete |
-| `drive` | folder → doc inheritance; share a folder with a whole team |
-| `notion` | nested workspaces → teamspaces → pages, roles cascade down |
-| `github` | org → team → repo roles + a protected branch that steps up to admin-only |
-| `slack` | channels + nested teams + a public channel via `user:*` wildcard |
-| `saas-multitenant` | tenant org roles inherited into a workspace and its resources |
-| `marketplace` | two-sided buyer/seller separation + platform-support escalation |
+| `docs` | org → workspace → folder/doc with owner/editor/viewer + team sharing |
+| `drive` | nested folders → docs, editor tier, team share, opt-in public link |
+| `notion` | connected workspaces → teamspaces → arbitrarily nested pages |
+| `github` | enterprise → org → team → repo roles + protected-branch step-up |
+| `slack` | workspace → public/private channels + nested teams |
+| `jira` | project roles → board → issue (assignee/reporter/watcher) |
+| `helpdesk` | queue-based agent access, customer sees only their ticket, escalation |
+| `saas-multitenant` | tenant org (+ sub-tenants) → workspace → resource, strict isolation |
+| `marketplace` | two-sided buyer/seller + private payout lane + dispute escalation |
+| `reseller` | B2B2B: vendor → reseller → customer → workspace, delegated admin |
+| `healthcare` | patient records + care teams + time-boxed break-glass (HIPAA) |
+| `lms` | school → course → section → enrollment, student isolation |
+| `cicd` | org → project → environment → resource, protected-prod step-up |
+| `social` | symmetric friends + block override, posts visible to friends only |
+| `external-share` | internal folder tree + time-boxed external guest links (no leak) |
 | `bank` | Chinese-wall two-sided exclusion, compliance oversight exempt |
 | `warehouse` | ABAC: dataset gated by clearance **and** purpose (an `&` intersection) |
 | `classified` | ordered clearance levels + need-to-know compartment + NOFORN exclusion |
 
-The bottom four (`bank`, `warehouse`, `classified`, `marketplace`) show zzb handling
-the hard stuff — mutual exclusion, ABAC intersections, ordered levels, multi-party
-separation — so **highly complex apps are first-class, not an afterthought**. Run
-`zzb init --list` to see them all.
+The regulated/complex set (`bank`, `warehouse`, `classified`, `reseller`,
+`marketplace`) shows zzb handling the hard stuff — mutual exclusion, ABAC
+intersections, ordered levels, B2B2B delegation, multi-party separation — so
+**highly complex apps are first-class, not an afterthought**.
+
+> **Templates cover the authorization graph, not your accounts.** Creating the real
+> orgs, users, workspaces, and hosted login is the auth service's onboarding layer
+> (the `authsetup` CLI) — complementary to zzb. Each template's `README.md` spells out
+> the boundary and the single-store-vs-per-tenant scaling decision.
+
+Run `zzb init --list` to see them all.
 
 ## 60 seconds to your first win
 

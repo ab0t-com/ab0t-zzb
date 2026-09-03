@@ -13,6 +13,21 @@ semantic versioning (published versions carry a `-public` suffix; git tags are t
 
 _Nothing yet._
 
+## [0.1.4] — 2026-09-03
+
+### Changed — templates are now production starting points
+- **All 10 templates rebuilt to a production, system-aware bar** and **8 new templates
+  added (18 total).** Each ships a complete, layered model (org/tenancy → workspace/team
+  → resource), a realistic `seed.json` (no `user:*` by default → audit-clean), an
+  `assertions.json` proving the "must never" rules, and a **`README.md`** explaining the
+  full data model, the authsetup-vs-zzb system boundary, and single-store-vs-per-tenant
+  scaling. Every template validated live: assertions green + `zzb audit` gate PASS.
+- New templates: `jira`, `helpdesk`, `reseller` (B2B2B), `healthcare` (break-glass),
+  `lms`, `cicd` (prod step-up), `social` (symmetric friends + block), `external-share`.
+- `drive` now has nested folders + an editor tier + an opt-in public link; `slack`,
+  `github`, `saas-multitenant`, `marketplace` deepened to real multi-layer models.
+- `zzb init` now also scaffolds the template's **`README.md`** alongside the JSON.
+
 ## [0.1.3] — 2026-09-03
 
 ### Added
