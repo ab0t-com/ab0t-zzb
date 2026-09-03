@@ -13,6 +13,21 @@ semantic versioning (published versions carry a `-public` suffix; git tags are t
 
 _Nothing yet._
 
+## [0.1.5] — 2026-09-03
+
+### Fixed (audit false-positives)
+- **`user:*` in an exclusion-only position** is no longer flagged HIGH — a wildcard on a
+  relation used only in a `-` (restriction) operand is emitted at LOW ("public restriction
+  marker"). A wildcard in any grant position still flags HIGH.
+- **Dark-intersection no longer false-flags an `&` gated on a computed permission** (e.g.
+  `classification->can_clear`) — the arrow tail is resolved against the model; a truly
+  unreachable relation operand still flags dark.
+- **Separation-of-duties no longer BLOCKs a legitimate symmetric `&`** (e.g.
+  `friend = follower & followed_back`) — escalation to BLOCKER now requires an
+  approval-plausible permission name (approve/sign/authorize/review/dual/control/release)
+  or a live self-approver on such a gate. A real dual-control gate one subject can
+  self-approve still BLOCKs.
+
 ## [0.1.4] — 2026-09-03
 
 ### Changed — templates are now production starting points
