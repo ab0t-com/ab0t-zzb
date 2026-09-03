@@ -5,19 +5,21 @@ authorization on the **ab0t auth service** (`https://auth.service.ab0t.com`). Th
 page routes you to the right skill — and the right *section* of it — and tells you
 when the CLI is **not** the tool.
 
-## The 6 skills
+## The 7 skills
 
 | Skill | What it's for |
 |---|---|
 | **`zzb`** | Install + the command reference (auth, write, check, read, model, assert, transact, changes). |
+| **`zzb-auth-as-code`** | START HERE for a NEW app/tenant: the 4-system picture + the whole slice — provision (authsetup) + model (zzb) + runtime read/write (SDK), via `init --with-tenancy --with-sdk go`, `auth.yaml`, and `plan`/`apply`. |
 | **`zzb-modeling`** | The model file + the permission language (`+ & - ->`) and every schema **pattern**. Starts with a "which pattern do I need?" index. |
 | **`zzb-authorization-recipes`** | Whole setups by customer **size** (A–E) + a "**I'm building X**" product-shapes map. |
 | **`zzb-lifecycle`** | Manage authz over time: config-as-code, CI, versioning, migration, day-2 ops. |
 | **`zzb-audit`** | Audit your own store for over-grants, public exposure, dark-by-intersection, drift. |
 
-Order for a full picture: `zzb` → `zzb-modeling` →
+Order for a full picture: `zzb` → `zzb-auth-as-code` → `zzb-modeling` →
 `zzb-authorization-recipes` → `zzb-lifecycle` → `zzb-audit`.
-Jump straight to one if you know what you need.
+Jump straight to one if you know what you need. **New to authorization and
+starting from nothing? Read `zzb-auth-as-code` first.**
 
 ## "I want to model X" → where to go
 
@@ -46,6 +48,7 @@ inline in `zzb-modeling`; `references/…` are its deep-dive files.
 | I want to… | Read |
 |---|---|
 | Install the CLI, learn the commands + tuple notation | **`zzb`** |
+| **Go from NOTHING to a working, safe slice** (provision + model + runtime read/write), `init --with-tenancy --with-sdk go`, `auth.yaml`, `plan`/`apply`, `auth login --from-authsetup` | **`zzb-auth-as-code`** |
 | Publish the model in CI, version + roll back, migrate from RBAC/SpiceDB/OpenFGA | **`zzb-lifecycle`** |
 | Decide CLI vs SDK vs REST API (runtime vs change-time) | **`zzb-lifecycle`** (CLI vs SDK vs REST) |
 | Bulk-load / backfill grants, dual-run during cutover | **`zzb-lifecycle`** (migration) |

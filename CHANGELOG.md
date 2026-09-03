@@ -13,6 +13,29 @@ semantic versioning (published versions carry a `-public` suffix; git tags are t
 
 _Nothing yet._
 
+## [0.2.0] — 2026-09-03
+
+### Added — auth-as-code (connect the four systems)
+- **`zzb plan -f auth.yaml` / `zzb apply -f auth.yaml`** — declare tenancy + model +
+  runtime in ONE manifest. `plan` previews declared-vs-live (read-only, safe in CI);
+  `apply` reconciles it — **audit+assert gated, plan-first, idempotent**, `--prune` only
+  removes manifest-managed resources (never deletes what it did not create), and it
+  requires both the tenancy and model credential planes explicitly (never silently mixed).
+- **`zzb init --template X --with-tenancy --with-sdk go`** — scaffold the FULL slice:
+  `model.json` + `assertions.json` + `seed.json` + `README.md` + an authsetup tenancy
+  config + Go SDK wiring (the read `Check` path AND the app-originated tuple-WRITE path,
+  with the auth-service user-id identity join made explicit).
+- **`zzb auth login --from-authsetup <dir>`** — bridge an authsetup-provisioned org into
+  `~/.zzb/config.json` (url + token + store) in one command.
+- **`--publish` is now audit-gated** — `init --publish` / `apply` run the `audit` high gate
+  + `assert run` and refuse to publish on failure (`--force` overrides).
+- **New skill `zzb-auth-as-code`** — the blueprint/onboarding skill tying authsetup + zzb +
+  auth-go-sdk + templates into one adoptable flow (7 skills total).
+
+### Requires (ships separately)
+- `authsetup destroy` (tenancy teardown, used by the golden path + apply) ships via the
+  **authsetup** CLI's own release, not this one.
+
 ## [0.1.5] — 2026-09-03
 
 ### Fixed (audit false-positives)

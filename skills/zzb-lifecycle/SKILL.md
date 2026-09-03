@@ -14,6 +14,12 @@ zzb --version        # confirm
 
 HTTPS-only, sha256-verified, idempotent. Update with `zzb update`.
 
+> **Starting from NOTHING (a new app or tenant)?** This skill is the *after* —
+> managing a model that already exists. To stand the whole slice up in the first
+> place — provision the tenant org + login (authsetup), publish the model (zzb),
+> and wire the runtime read **and** write path (SDK), as one declarative
+> `auth.yaml` with `plan`/`apply` — read **`zzb-auth-as-code`** first.
+
 ---
 
 ## CLI vs SDK vs REST — who does what
