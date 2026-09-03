@@ -1,0 +1,49 @@
+# zzb — agent bootstrap
+
+> zzb is a single static Go binary: a scriptable HTTPS client for the
+> ab0t auth service's authorization API (relationship tuples + Check / Expand /
+> ListObjects / models / assertions / durable watch) at
+> https://auth.service.ab0t.com. It is a CLIENT, not the engine. THE ONE RULE:
+> everything is a relationship tuple `object#relation@subject`, and a `store` is
+> an org (`store_id == org_id`). Always pass `--json` for machine-readable output.
+
+## Bootstrap sequence
+
+1. Install:
+   - Linux/macOS: `curl -fsSL https://raw.githubusercontent.com/ab0t-com/ab0t-zzb/main/install.sh | sh`
+   - Windows: `irm https://raw.githubusercontent.com/ab0t-com/ab0t-zzb/main/install.ps1 | iex`
+2. Confirm + keep current: `zzb --version` ; `zzb update --check`
+3. Configure (non-interactive): export `ZZB_URL=https://auth.service.ab0t.com`,
+   `ZZB_TOKEN`, `ZZB_STORE` (or `zzb auth login --url … --org … --email … --password …`).
+4. Read the skills router first: `skills/README.md` (which skill + CLI vs SDK vs API).
+   - drive the CLI: `skills/zzb/SKILL.md`
+   - schema + permission language: `skills/zzb-modeling/SKILL.md`
+   - sized customer setups: `skills/zzb-authorization-recipes/SKILL.md`
+   - manage over time / migrate / integrate: `skills/zzb-lifecycle/SKILL.md`
+5. Runtime authorization lives in your app via the SDK/REST API, NOT this CLI —
+   the CLI is for schema, ops, migration, CI, and debugging.
+6. Drive the core loop (write → check → read):
+   - `zzb --json relationship write document:r1 viewer user:alice`
+   - `zzb --json transact --write document:r2#viewer@user:bob --delete document:old#viewer@user:carol`
+   - `zzb --json check user:alice viewer document:r1`
+   - `zzb --json read --object document:r1`
+   - `zzb --json changes --cursor "<token>"`
+
+## Map
+
+- `install.sh` / `install.ps1` — HTTPS + sha256-verified installers.
+- `release/` — prebuilt binaries, `checksums.txt`, `VERSION`.
+- `README.md` — human front door. `docs/USAGE.md` — full cookbook.
+- `skills/` — bundled agent skills; `skills/README.md` is the router (driving,
+  modeling, recipes, lifecycle).
+- `CHANGELOG.md` / `SECURITY.md` / `LICENSE` — release notes / disclosure / MIT.
+
+## Key facts an agent should internalize
+
+- Service base URL is `https://auth.service.ab0t.com` (dev: `auth.dev.ab0t.com`;
+  local: `localhost:8001`). A store is an org.
+- A relation-only `read` (no `--object`, no `--user`) is REJECTED by design.
+- `transact` writes are create-only: writing an existing tuple aborts the whole
+  batch (409) and persists nothing. It is atomic.
+- Config precedence is flags → env → `~/.zzb/config.json`.
+- Non-zero exit on any API error; `--json` for parseable output.

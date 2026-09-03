@@ -1,0 +1,2 @@
+# Nothing to ignore in the published tree by default; release/ IS shipped.
+.DS_Store
