@@ -35,6 +35,29 @@ curl -fsSL https://raw.githubusercontent.com/ab0t-com/ab0t-zzb/main/install.sh |
 
 ---
 
+## Templates — start from a real shape, not a blank file
+
+`zzb init --template <name> [--publish]` scaffolds a working, tested model. Ten
+templates span simple roles to genuinely hard authorization:
+
+| Template | What it models |
+|---|---|
+| `docs` | owner / editor / viewer + computed can_view/edit/delete |
+| `drive` | folder → doc inheritance; share a folder with a whole team |
+| `notion` | nested workspaces → teamspaces → pages, roles cascade down |
+| `github` | org → team → repo roles + a protected branch that steps up to admin-only |
+| `slack` | channels + nested teams + a public channel via `user:*` wildcard |
+| `saas-multitenant` | tenant org roles inherited into a workspace and its resources |
+| `marketplace` | two-sided buyer/seller separation + platform-support escalation |
+| `bank` | Chinese-wall two-sided exclusion, compliance oversight exempt |
+| `warehouse` | ABAC: dataset gated by clearance **and** purpose (an `&` intersection) |
+| `classified` | ordered clearance levels + need-to-know compartment + NOFORN exclusion |
+
+The bottom four (`bank`, `warehouse`, `classified`, `marketplace`) show zzb handling
+the hard stuff — mutual exclusion, ABAC intersections, ordered levels, multi-party
+separation — so **highly complex apps are first-class, not an afterthought**. Run
+`zzb init --list` to see them all.
+
 ## 60 seconds to your first win
 
 ```sh
@@ -79,5 +102,18 @@ Start at **`skills/README.md`** — it points you to the right one.
 - **Environments:** prod `https://auth.service.ab0t.com` · dev `https://auth.dev.ab0t.com` · local `http://localhost:8001`.
 - **Security:** see [SECURITY.md](SECURITY.md) for reporting and verifying your install. Contributing? Enable the secret-scan git hooks: `git config core.hooksPath .githooks`.
 - **Reference README** (architecture, full feature list, repo layout): [README1.md](README1.md).
+
+## The ab0t auth family
+
+zzb is the CLI. If you're wiring authorization into an app, you probably also want:
+
+- **[auth-sdk-go](https://github.com/ab0t-com/auth-sdk-go)** — the Go SDK for runtime
+  permission checks from your service (what your app calls at request time).
+- **client setup CLI** (`ab0t-setup-go`) — bootstraps a client/org against the auth
+  service. Find it in the [ab0t-com](https://github.com/ab0t-com) org.
+- **REST API** — everything zzb and the SDK do, directly:
+  `https://auth.service.ab0t.com/openapi.json`.
+
+---
 
 MIT licensed — see [LICENSE](LICENSE).
